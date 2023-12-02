@@ -28,6 +28,7 @@ permalink: /:title.html
 url: "https://log.damnpeople.fr" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: baptistemm
 github_username:  bmillemathias
+linkedin_username: bmillemathias
 
 # Build settings
 theme: minima
