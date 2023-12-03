@@ -58,7 +58,7 @@ $ git push http://gitlab.domain.tld/repo.git
 
 <figure>
     <img src="/assets/images/202301201-gnome-keyring.png"
-         alt="Albuquerque, New Mexico">
+         alt="Seahorse windows">
     <figcaption>Seahorse showing our github http credentials</figcaption>
 </figure>
 How does it work? When you log in your desktop session, the keyring daemon (GNOME or KDE) unlocks the secret storage, then git can access the user and the password for the domain.
