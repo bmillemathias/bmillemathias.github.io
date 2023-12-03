@@ -1,0 +1,8 @@
+---
+services:
+  jekyll:
+    image: docker.io/bretfisher/jekyll-serve
+    volumes:
+      - .:/site:Z
+    ports:
+      - '4000:4000'
