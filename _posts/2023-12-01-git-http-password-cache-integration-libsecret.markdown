@@ -2,7 +2,7 @@
 layout: post
 title:  "Your git http passwords stored safely in libsecret (GNOME or KDE)"
 date:   2023-12-01 16:24:04 +0000
-categories: technology
+tags: technology
 ---
 
 Git supports several transport protocols and one of these is http. I would not use as a default method to access git repository but sometimes,

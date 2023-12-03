@@ -3,7 +3,7 @@ layout: post
 lang: fr
 title: "Montage et decouverte du portable Framework 13' AMD Ryzen"
 date: 2023-12-03 08:00:04 +0000
-categories: technology
+tags: technology
 ---
 ![](/assets/images/202312-fw-13-1.jpg)
 
@@ -75,7 +75,7 @@ Notons aussi que je n'avais pas vu qu'il y avait des caches d'autocollant dans l
 
 On y est presque, il ne reste plus qu'à brancher les **ports d'extensions**. C'est aussi **un des atouts de machines Framework**. Elles sont équipées d'emplacements qui permettent de brancher des sorties de different format interchangeables: USB-C, USB-A, port HDMI, DisplayPort, slot microSD, un slot de stockage, etc. Avis aux bidouilleurs, un trouve une communauté Framework pour créér ses propres ports.
 
-![Quelques ports d'extension Framework](202312-fw-13-9-extensions.png)
+![Quelques ports d'extension Framework](/assets/images/202312-fw-13-9-extensions.png)
 
 Le modèle 13 pouce est équipé de 4 emplacements. J'ai pour ma part acheté 4 USB-C, 1 displayPort et 1 HDMI.
 
