@@ -40,6 +40,13 @@ plugins:
 jekyll_analytics:
   GoogleAnalytics:
     id: UA-81320-7
+
+defaults:
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
