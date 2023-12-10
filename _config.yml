@@ -32,6 +32,7 @@ linkedin_username: bmillemathias
 
 # Build settings
 theme: minima
+whitelist: [jekyll-analytics]
 plugins:
   - jekyll-feed
   - jekyll-sitemap
