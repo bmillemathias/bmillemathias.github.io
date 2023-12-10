@@ -1,7 +1,7 @@
 ---
 layout: post
 lang: fr
-title: "Montage et decouverte du portable Framework 13' AMD Ryzen"
+title: "Montage et découverte du portable Framework 13' AMD Ryzen"
 date: 2023-12-03 08:00:04 +0000
 tags: technology
 ---
