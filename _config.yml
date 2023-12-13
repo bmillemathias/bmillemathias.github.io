@@ -32,15 +32,11 @@ linkedin_username: bmillemathias
 
 # Build settings
 theme: minima
-whitelist: [jekyll-analytics]
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-analytics
 
-jekyll_analytics:
-  GoogleAnalytics:
-    id: UA-81320-7
+google_analytics: UA-81320-7
 
 defaults:
   - scope:
