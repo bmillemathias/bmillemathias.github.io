@@ -36,7 +36,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
 
-google_analytics: UA-81320-7
+google_analytics: G-5GKGWBFLQJ
 
 defaults:
   - scope:
