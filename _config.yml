@@ -39,6 +39,9 @@ plugins:
 
 google_analytics: G-5GKGWBFLQJ
 
+minima:
+  skin: solarized
+
 defaults:
   - scope:
       path: "assets/images"
