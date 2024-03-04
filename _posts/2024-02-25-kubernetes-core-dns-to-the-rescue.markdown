@@ -1,8 +1,8 @@
 ---
 layout: post
 lang: en
-title: Solving IPv6 DNS resolution issue with CoreDNS
-date: 2023-02-24 00:00:00 +0000
+title: "Kubernetes: Solving IPv6 DNS resolution issue with CoreDNS"
+date: 2024-02-24 00:00:00 +0000
 tags: technology kubernetes
 ---
 
