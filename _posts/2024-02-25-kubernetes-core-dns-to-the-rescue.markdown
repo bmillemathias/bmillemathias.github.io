@@ -20,17 +20,19 @@ my colleague, Feb 2024
 While deploying the [Percona Operator for PostgreSQL][postgresql-operator] in Kubernetes, we discovered [PGBouncer][pgbouncer] pod was not able to connect the Primary PostgreSQL service because of a DNS resolution issue.
 Our attempts done in the container of PGBouncer were working fine, using `getent hosts postgresql-primary` either with `A` or `AAAA` type.
 
-Strange thing is inside minikube on my colleague's laptop it was working fine. So it went against the core principe of Kubernetes :)
+![](/assets/images/pod-service-pods.png)
+
+Strange thing is inside minikube on my colleague's laptop it was working fine.
 
 ### Going deeper into the rabbit hole
 
 After some investigation from a colleague (with `strace` and `tcpdump`), he found out that PGBouncer provided in the container does not rely on the venerable [GNU libc][glibc] to resolve hostname but actually use lib [c-ares][c-ares], an asynchronous resolver.
 
-During the DNS resolution
+Here the steps observed during the DNS resolution
 1. PGBouncer [creates a packet `AF_UNSPEC`][dns-resolution] which means it does not specify to use IPv4 or IPv6 and do a `ares_gethostbyname` on `postgresql-primary`
-2. c-ares receives the request, and it processes first using IPv6, so it sends a AAAA query.
-3. The `AAAA` reaches coredns (the inside-Kubernetes resolver) which at some point, is forwarded to the host
-4. The resolution on the host is performed by systemd-resolved, which returns a `SERVFAIL` answer.
+2. The data is passed to c-ares, and it processes first using IPv6, so it sends a AAAA query to the resolver.
+3. The `AAAA` reaches CoreDNS (the inside-Kubernetes resolver) which at some point, is forwarded to the kubernetes node.
+4. The resolution on the node is performed by systemd-resolved, which returns a `SERVFAIL` answer.
 5. PBBouncer receives the `SERVFAIL` answer and returned the error to the client. Final stop.
 
 ### A quick look to the CoreDNS configuration
@@ -72,12 +74,15 @@ and
 ```
 forward . /etc/resolv.conf
 ```
-which means query are resolved using the content of `/etc/resolv.conf` in the CoreDNS pod.
+which means queries are resolved using the content of `/etc/resolv.conf` in the CoreDNS pod, which is actually the file of the Kubernetes node.
 
 ### Why systemd-resolved returns a SERVFAIL ?
 
 As I understand it, `systemd-resolved`, for the sake of security, does not forward what it considers local queries over the internet resolvers, and answers `SERVFAIL` over `NXDOMAIN`.
-In our case, PBBouncer stops any further DNS query.
+
+Could it be related that  `.local` TLD is used by [zeroconf][zeroconf] and [mdns][mdns] (Apple Bonjour or Avahi) ? I don't know.
+
+Anyway, after this, PBBouncer stops any further DNS query.
 
 ## Resolving the resolution
 
@@ -124,6 +129,8 @@ Problem solved.
 [glibc]: https://www.gnu.org/software/libc/
 [c-ares]: https://c-ares.org/
 [dns-resolution]: https://github.com/pgbouncer/pgbouncer/blob/e913a15592c5d03008fc60b15be692e310e37d21/src/dnslookup.c#L595C2-L595C4
+[zeroconf]: http://www.zeroconf.org/
+[mdns]: http://www.multicastdns.org/
 [coredns-kubernetes]: https://coredns.io/plugins/kubernetes/
 [coredns-rewrite]: https://coredns.io/plugins/rewrite/
 [coredns-template]: https://coredns.io/plugins/template/
